@@ -67,7 +67,8 @@ public final class Launcher {
             out.println("Size:\t\t" + params.count + " points");
             out.println(String.format("Time:\t\t%.3f seconds", time));
             out.println("Distance:\t" + solution.getLength());
-            out.println(solution);
+            out.println("A:\t\t" + solution.getA());
+            out.println("B:\t\t" + solution.getB());
 
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid algorithm: " + params.algo);
