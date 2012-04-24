@@ -77,6 +77,10 @@ public final class Planar implements Solver {
         for (Point lp : yleft) {
             if (m - lp.get(0) < best.getLength()) {
                 for (Point rp : yright) {
+                    if (rp.get(1) > lp.get(1) + best.getLength()) {
+                        /* We've moved too far in Y. Drop out. */
+                        break;
+                    }
                     if (rp.get(0) - m < best.getLength()) {
                         if (lp.dist(rp) < best.getLength()) {
                             best = new Pair(lp, rp);
