@@ -1,16 +1,17 @@
 package com.nullprogram.dp40d;
 
+import java.lang.StringBuilder;
 import java.util.Arrays;
 import java.util.Random;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import net.jcip.annotations.Immutable;
 
 /**
  * Represents a point in a system of arbitrary dimension. This class
  * is immutable.
  */
-@Data
 @Immutable
+@EqualsAndHashCode
 public final class Point {
     private final float[] coords;
 
@@ -24,14 +25,6 @@ public final class Point {
         for (int i = 0; i < dims; i++) {
             coords[i] = rng.nextFloat();
         }
-    }
-
-    /**
-     * Get this point's coordinates.
-     * @return a copy of this point's coordinate array
-     */
-    public float[] getCoords() {
-        return Arrays.copyOf(coords, coords.length);
     }
 
     /**
@@ -72,5 +65,19 @@ public final class Point {
      */
     public float dist(final Point p) {
         return (float) Math.sqrt(dist2(p));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("(");
+        for (int i = 0; i < coords.length; i++) {
+            str.append(coords[i]);
+            if (i < coords.length - 1) {
+                str.append(", ");
+            }
+        }
+        str.append(")");
+        return str.toString();
     }
 }
