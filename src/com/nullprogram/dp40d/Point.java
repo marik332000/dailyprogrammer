@@ -1,6 +1,5 @@
 package com.nullprogram.dp40d;
 
-import java.lang.StringBuilder;
 import java.util.Arrays;
 import java.util.Random;
 import lombok.EqualsAndHashCode;
