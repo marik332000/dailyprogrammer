@@ -1,5 +1,7 @@
 package com.nullprogram.dp40d;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +12,26 @@ import java.util.Random;
 public final class Launcher {
 
     private static final double NANO = 1000000000.0;
+    private static final int DEFAULT_COUNT = 10000;
+
+    @Parameter(names = { "--seed", "-s" },
+               description = "Point generator seed.")
+    private int seed = new Random().nextInt();
+
+    @Parameter(names = "-n", description = "Number of points.")
+    private int count = DEFAULT_COUNT;
+
+    @Parameter(names = { "--dims", "-d" },
+               description = "Number of dimensions to the points.")
+    private int dimensions = 2;
+
+    @Parameter(names = { "--algo" },
+               description = "Solver algorithm to use (naive, planar).")
+    private String algo = "naive";
+
+    @Parameter(names = { "--help" },
+               description = "Print this usage information.")
+    private boolean usage = false;
 
     /** Hidden constructor. */
     private Launcher() {
@@ -21,25 +43,38 @@ public final class Launcher {
      */
     public static void main(final String[] args) {
         /* Configure */
+        Launcher params = new Launcher();
+        JCommander jc = new JCommander(params, args);
+        if (params.usage) {
+            jc.usage();
+            System.exit(0);
+        }
+        Random rng = new Random(params.seed);
         PrintStream out = System.out;
-        int count = 10000;
-        int dimensions = 2;
-        Random rng = new Random();
 
         /* Generate points */
-        out.println("Size:\t\t" + count + " points");
-        PointFactory factory = new PointFactory(rng, dimensions);
-        List<Point> points = factory.generate(count);
+        PointFactory factory = new PointFactory(rng, params.dimensions);
+        List<Point> points = factory.generate(params.count);
 
-        /* Solve */
-        long start = System.nanoTime();
-        Solver solver = new Naive(points);
-        Pair solution = solver.solve();
-        double time = (System.nanoTime() - start) / NANO;
+        try {
+            /* Solve */
+            long start = System.nanoTime();
+            Solver solver = Solvers.create(points, params.algo);
+            Pair solution = solver.solve();
+            double time = (System.nanoTime() - start) / NANO;
 
-        /* Print results */
-        out.println(String.format("Time:\t\t%.3f seconds", time));
-        out.println("Distance:\t" + solution.getLength());
-        out.println(solution);
+            /* Print results */
+            out.println("Size:\t\t" + params.count + " points");
+            out.println(String.format("Time:\t\t%.3f seconds", time));
+            out.println("Distance:\t" + solution.getLength());
+            out.println(solution);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid algorithm: " + params.algo);
+            System.exit(1);
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+            System.exit(1);
+        }
     }
 }

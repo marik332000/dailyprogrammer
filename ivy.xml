@@ -8,6 +8,9 @@
     <conf name="analysis" extends="build" visibility="private"/>
   </configurations>
   <dependencies>
+    <dependency org="com.beust" name="jcommander" rev="1.20"
+                conf="default"/>
+
     <!-- Build -->
     <dependency org="org.projectlombok" name="lombok" rev="0.10.4"
                 conf="build->default"/>
