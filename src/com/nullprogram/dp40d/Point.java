@@ -28,6 +28,14 @@ public final class Point {
     }
 
     /**
+     * Create a point by providing coordinates.
+     * @param coords  the coordinate array
+     */
+    Point(final float[] coords) {
+        this.coords = Arrays.copyOf(coords, coords.length);
+    }
+
+    /**
      * Get the position for an individual dimension.
      * @param dim  the dimension to query
      * @return the position of this point
