@@ -3,8 +3,14 @@ package com.nullprogram.dp40d;
 import java.util.Arrays;
 import java.util.Random;
 import lombok.Data;
+import net.jcip.annotations.Immutable;
 
+/**
+ * Represents a point in a system of arbitrary dimension. This class
+ * is immutable.
+ */
 @Data
+@Immutable
 public final class Point {
     private final float[] coords;
 
@@ -13,7 +19,7 @@ public final class Point {
      * @param rng   the random number generator to use
      * @param dims  the number of dimensions for this point
      */
-    Point(Random rng, int dims) {
+    Point(final Random rng, final int dims) {
         coords = new float[dims];
         for (int i = 0; i < dims; i++) {
             coords[i] = rng.nextFloat();
@@ -33,7 +39,7 @@ public final class Point {
      * @param dim  the dimension to query
      * @return the position of this point
      */
-    public float get(int dim) {
+    public float get(final int dim) {
         return coords[dim];
     }
 
@@ -50,7 +56,7 @@ public final class Point {
      * @param p  the other point
      * @return the distance between this point and the other point squared
      */
-    public float dist2(Point p) {
+    public float dist2(final Point p) {
         float sum = 0;
         for (int i = 0; i < coords.length; i++) {
             float diff = this.coords[i] - p.coords[i];
@@ -64,7 +70,7 @@ public final class Point {
      * @param p  the other point
      * @return the distance between this point and the other point
      */
-    public float dist(Point p) {
+    public float dist(final Point p) {
         return (float) Math.sqrt(dist2(p));
     }
 }

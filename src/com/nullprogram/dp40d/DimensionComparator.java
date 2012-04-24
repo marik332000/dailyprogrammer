@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 final class DimensionComparator implements Comparator<Point> {
 
+    /** The dimension to be checked. */
     private final int dimension;
 
     @Override

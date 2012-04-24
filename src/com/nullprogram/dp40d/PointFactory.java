@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Create points from a specified random number generator.
+ */
 @RequiredArgsConstructor
-public class PointFactory {
+public final class PointFactory {
     private final Random rng;
     private final int dimensions;
 
@@ -23,7 +26,7 @@ public class PointFactory {
      * @param count  the number of points to generate
      * @return a list of generated points
      */
-    public List<Point> generate(int count) {
+    public List<Point> generate(final int count) {
         List<Point> points = new ArrayList<Point>(count);
         for (int i = 0; i < count; i++) {
             points.add(generate());

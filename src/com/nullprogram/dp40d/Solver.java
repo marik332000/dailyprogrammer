@@ -11,5 +11,5 @@ public interface Solver {
      * Solve the problem.
      * @return the closest pair of points
      */
-    public Pair solve();
+    Pair solve();
 }

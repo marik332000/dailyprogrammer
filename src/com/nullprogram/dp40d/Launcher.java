@@ -1,12 +1,25 @@
 package com.nullprogram.dp40d;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Launcher {
-    public static void main(String[] args) {
+/**
+ * Houses the main method and handles command line arguments.
+ */
+public final class Launcher {
+
+    private static final double NANO = 1000000000.0;
+
+    /** Hidden constructor. */
+    private Launcher() {
+    }
+
+    /**
+     * The main method.
+     * @param args  command line arguments
+     */
+    public static void main(final String[] args) {
         /* Configure */
         PrintStream out = System.out;
         int count = 10000;
@@ -22,7 +35,7 @@ public class Launcher {
         long start = System.nanoTime();
         Solver solver = new Naive(points);
         Pair solution = solver.solve();
-        double time = (System.nanoTime() - start) / 1000000000.0d;
+        double time = (System.nanoTime() - start) / NANO;
 
         /* Print results */
         out.println(String.format("Time:\t\t%.3f seconds", time));

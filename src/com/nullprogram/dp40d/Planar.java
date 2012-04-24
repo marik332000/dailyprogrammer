@@ -5,14 +5,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Planar implements Solver {
+/**
+ * Solves the 2-dimensional case in O(n log n) time using a
+ * divide-and-conquer alogrithm.
+ */
+public final class Planar implements Solver {
 
     private static final Comparator<Point> XSORT = new DimensionComparator(0);
     private static final Comparator<Point> YSORT = new DimensionComparator(1);
 
     private final List<Point> points;
 
-    public Planar(List<Point> points) {
+    /**
+     * Create this solver for the given points.
+     * @param points  the points to solve for
+     */
+    public Planar(final List<Point> points) {
         this.points = points;
         if (points.get(0).getDimensions() != 2) {
             throw new RuntimeException("Planar only solves for 2 dimensions.");
@@ -30,7 +38,13 @@ public class Planar implements Solver {
         return divide(xpoints, ypoints);
     }
 
-    private Pair divide(List<Point> x, List<Point> y) {
+    /**
+     * The recursive divide and conquer algorithm.
+     * @param x  list of points sorted by the x coordinate
+     * @param y  list of points sorted by the y coordinate
+     * @return the closest pair
+     */
+    private Pair divide(final List<Point> x, final List<Point> y) {
         if (x.size() <= 1) {
             return Pair.INFINITY;
         } else if (x.size() == 2) {
