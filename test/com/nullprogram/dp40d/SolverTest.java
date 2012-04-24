@@ -24,6 +24,15 @@ public class SolverTest {
         checkSolver(naive);
     }
 
+    /**
+     * Test the planar solver.
+     */
+    @Test
+    public void planarTest() {
+        Solver planar = new Planar(points);
+        checkSolver(planar);
+    }
+
     private void checkSolver(Solver solver) {
         Pair best = solver.solve();
         float dist2 = best.getA().dist2(best.getB());
