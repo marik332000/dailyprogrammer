@@ -29,6 +29,15 @@ public final class Point {
     }
 
     /**
+     * Get the position for an individual dimension.
+     * @param dim  the dimension to query
+     * @return the position of this point
+     */
+    public float get(int dim) {
+        return coords[dim];
+    }
+
+    /**
      * Get the dimensions of this point.
      * @return the number of dimensions of this point
      */
@@ -48,5 +57,14 @@ public final class Point {
             sum += diff * diff;
         }
         return sum;
+    }
+
+    /**
+     * Calculate the distance between two points.
+     * @param p  the other point
+     * @return the distance between this point and the other point
+     */
+    public float dist(Point p) {
+        return (float) Math.sqrt(dist2(p));
     }
 }
