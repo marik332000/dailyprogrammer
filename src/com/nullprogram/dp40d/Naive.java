@@ -13,9 +13,9 @@ public final class Naive implements Solver {
     private final List<Point> points;
 
     @Override
-    public Point[] solve() {
+    public Pair solve() {
         float best = 2f;
-        Point[] closest = null;
+        Pair closest = null;
         for (int i = 0; i < points.size(); i++) {
             for (int j = i + 1; j < points.size(); j++) {
                 Point a = points.get(i);
@@ -23,7 +23,7 @@ public final class Naive implements Solver {
                 float dist = a.dist2(b);
                 if (dist < best) {
                     best = dist;
-                    closest = new Point[] {a, b};
+                    closest = new Pair(a, b);
                 }
             }
         }

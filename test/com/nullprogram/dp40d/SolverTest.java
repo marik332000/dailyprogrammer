@@ -25,8 +25,8 @@ public class SolverTest {
     }
 
     private void checkSolver(Solver solver) {
-        Point[] best = solver.solve();
-        float dist2 = best[0].dist2(best[1]);
+        Pair best = solver.solve();
+        float dist2 = best.getA().dist2(best.getB());
         assertEquals(SOLUTION, dist2, 1e-16f);
     }
 }

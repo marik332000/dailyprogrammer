@@ -21,13 +21,12 @@ public class Launcher {
         /* Solve */
         long start = System.nanoTime();
         Solver solver = new Naive(points);
-        Point[] solution = solver.solve();
+        Pair solution = solver.solve();
         double time = (System.nanoTime() - start) / 1000000000.0d;
 
         /* Print results */
         out.println(String.format("Time:\t\t%.3f seconds", time));
-        out.println("Distance:\t" + Math.sqrt(solution[0].dist2(solution[1])));
-        out.println(solution[0]);
-        out.println(solution[1]);
+        out.println("Distance:\t" + solution.getLength());
+        out.println(solution);
     }
 }
