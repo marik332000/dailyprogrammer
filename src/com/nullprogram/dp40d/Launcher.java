@@ -98,6 +98,7 @@ public final class Launcher {
             double time = (System.nanoTime() - start) / NANO;
 
             /* Print results */
+            out.println("Algorithm:\t" + params.algo);
             out.println("Size:\t\t" + params.count + " points");
             out.println(String.format("Time:\t\t%.3f seconds", time));
             out.println("Distance:\t" + solution.getLength());
