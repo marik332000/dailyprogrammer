@@ -2,6 +2,9 @@ package com.nullprogram.dp40d;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Random;
@@ -29,6 +32,14 @@ public final class Launcher {
                description = "Solver algorithm to use (naive, planar).")
     private String algo = "naive";
 
+    @Parameter(names = { "--to-file" },
+               description = "Save the points to a file.")
+    private String toFile;
+
+    @Parameter(names = { "--from-file" },
+               description = "Read points from a file rather than generate.")
+    private String fromFile;
+
     @Parameter(names = { "--help" },
                description = "Print this usage information.")
     private boolean usage = false;
@@ -44,17 +55,40 @@ public final class Launcher {
     public static void main(final String[] args) {
         /* Configure */
         Launcher params = new Launcher();
-        JCommander jc = new JCommander(params, args);
-        if (params.usage) {
-            jc.usage();
-            System.exit(0);
+        try {
+            JCommander jc = new JCommander(params, args);
+            if (params.usage) {
+                jc.usage();
+                System.exit(0);
+            }
+        } catch (ParameterException e) {
+            System.out.println("error: " + e.getMessage());
+            System.exit(1);
         }
         Random rng = new Random(params.seed);
         PrintStream out = System.out;
 
         /* Generate points */
-        PointFactory factory = new PointFactory(rng, params.dimensions);
-        List<Point> points = factory.generate(params.count);
+        List<Point> points = null;
+        if (params.fromFile == null) {
+            PointFactory factory = new PointFactory(rng, params.dimensions);
+            points = factory.generate(params.count);
+        } else {
+            try {
+                points = PointFactory.fromFile(new File(params.fromFile));
+            } catch (IOException e) {
+                System.out.println("error: " + e.getMessage());
+                System.exit(1);
+            }
+        }
+        if (params.toFile != null) {
+            try {
+                PointFactory.toFile(new File(params.toFile), points);
+            } catch (IOException e) {
+                System.out.println("error: " + e.getMessage());
+                System.exit(1);
+            }
+        }
 
         try {
             /* Solve */
