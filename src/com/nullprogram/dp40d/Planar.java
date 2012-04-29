@@ -28,7 +28,7 @@ public final class Planar implements Solver {
     }
 
     @Override
-    public Pair solve() {
+    public Pair call() {
         /* Work with two sorted lists instead. */
         List<Point> xpoints = new ArrayList<Point>(points);
         Collections.sort(xpoints, XSORT);

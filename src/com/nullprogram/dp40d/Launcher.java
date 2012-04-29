@@ -3,6 +3,7 @@ package com.nullprogram.dp40d;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.nullprogram.dp.TimedExec;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -14,7 +15,6 @@ import java.util.Random;
  */
 public final class Launcher {
 
-    private static final double NANO = 1000000000.0;
     private static final int DEFAULT_COUNT = 10000;
 
     @Parameter(names = { "--seed", "-s" },
@@ -92,10 +92,10 @@ public final class Launcher {
 
         try {
             /* Solve */
-            long start = System.nanoTime();
             Solver solver = Solvers.create(points, params.algo);
-            Pair solution = solver.solve();
-            double time = (System.nanoTime() - start) / NANO;
+            TimedExec exec = new TimedExec();
+            Pair solution = exec.submit(solver);
+            double time = exec.getElapsed();
 
             /* Print results */
             out.println("Algorithm:\t" + params.algo);

@@ -34,7 +34,7 @@ public class SolverTest {
     }
 
     private void checkSolver(Solver solver) {
-        Pair best = solver.solve();
+        Pair best = solver.call();
         float dist2 = best.getA().dist2(best.getB());
         assertEquals(SOLUTION, dist2, 1e-16f);
     }

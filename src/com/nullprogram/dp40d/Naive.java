@@ -13,7 +13,7 @@ public final class Naive implements Solver {
     private final List<Point> points;
 
     @Override
-    public Pair solve() {
+    public Pair call() {
         float best = 2f;
         Pair closest = null;
         for (int i = 0; i < points.size(); i++) {
