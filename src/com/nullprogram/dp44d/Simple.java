@@ -34,14 +34,14 @@ public class Simple implements Solver {
      * The number of primes in range.
      */
     @Getter
-    private BigInteger count = BigInteger.ZERO;
+    private int count = 0;
 
     @Override
     public final void run() {
         BigInteger i = min.subtract(BigInteger.ONE).nextProbablePrime();
         while (i.compareTo(max) < 0) {
             sum = sum.add(i);
-            count = count.add(BigInteger.ONE);
+            count++;
             i = i.nextProbablePrime();
         }
     }

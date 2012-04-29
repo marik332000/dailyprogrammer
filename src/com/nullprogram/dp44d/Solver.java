@@ -11,7 +11,7 @@ public interface Solver extends Runnable {
      * Get the number of primes in range.
      * @return the count
      */
-    BigInteger getCount();
+    int getCount();
 
     /**
      * Get the sum of all primes in range.
