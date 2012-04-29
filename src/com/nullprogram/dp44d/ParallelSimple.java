@@ -10,7 +10,11 @@ import lombok.extern.java.Log;
 import lombok.val;
 
 /**
- * Runs a Simple solver on each CPU core.
+ * Runs a Simple solver on each CPU core. In practice, even though
+ * this does in fact put more load on the CPU according to
+ * <code>top</code>, it tends to be <i>slower</i> than the plain
+ * version! I believe it may have to do with contention over
+ * BigInteger's internal Random instance.
  */
 @Log
 @ToString
