@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import static java.math.BigInteger.ONE;
 
 /**
  * This solver cheats a bit by taking great advantage of BigInteger's
@@ -13,6 +14,11 @@ import lombok.ToString;
 @ToString
 @RequiredArgsConstructor
 public class Simple implements Solver {
+
+    /**
+     * The accuracy when testing for primes (2^-ACCURACY).
+     */
+    private static final int ACCURACY = 10;
 
     /**
      * The minimum of the range, inclusive.
@@ -38,11 +44,11 @@ public class Simple implements Solver {
 
     @Override
     public final void run() {
-        BigInteger i = min.subtract(BigInteger.ONE).nextProbablePrime();
-        while (i.compareTo(max) < 0) {
-            sum = sum.add(i);
-            count++;
-            i = i.nextProbablePrime();
+        for (BigInteger i = min; i.compareTo(max) < 0; i = i.add(ONE)) {
+            if (i.isProbablePrime(ACCURACY)) {
+                sum = sum.add(i);
+                count++;
+            }
         }
     }
 }
