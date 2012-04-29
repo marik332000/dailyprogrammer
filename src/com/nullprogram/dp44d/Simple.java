@@ -20,7 +20,7 @@ public class Simple implements Solver {
     private final BigInteger min;
 
     /**
-     * The maximum of the range, inclusive.
+     * The maximum of the range, exclusive.
      */
     private final BigInteger max;
 
