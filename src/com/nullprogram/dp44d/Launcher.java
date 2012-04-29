@@ -1,5 +1,6 @@
 package com.nullprogram.dp44d;
 
+import com.nullprogram.dp.TimedCallable;
 import java.math.BigInteger;
 
 /**
@@ -8,11 +9,6 @@ import java.math.BigInteger;
  * all fits inside long, but I like making a general solution.
  */
 public final class Launcher {
-
-    /**
-     * Nanoseconds in a second.
-     */
-    private static final double NANO = 1000000000.0;
 
     /**
      * Hidden constructor.
@@ -32,9 +28,7 @@ public final class Launcher {
         BigInteger min = new BigInteger(args[0]);
         BigInteger max = new BigInteger(args[1]).add(min);
         Solver solver = new Simple(min, max);
-        long start = System.nanoTime();
-        solver.run();
-        double time = (System.nanoTime() - start) / NANO;
+        double time = new TimedCallable(solver).call();
         System.out.println("Took " + time + " seconds.");
         System.out.println(solver);
     }
