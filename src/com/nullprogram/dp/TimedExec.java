@@ -18,7 +18,7 @@ public final class TimedExec {
     private static final double NANO = 1000000000.0;
 
     /**
-     * Overall elapsed running time for this instance.
+     * Overall elapsed running time for this instance in seconds.
      */
     @Getter
     private double elapsed = 0;
@@ -43,7 +43,7 @@ public final class TimedExec {
     /**
      * Execute the runnable and add it's running time to the total.
      * @param task  the task to execute
-     * @return the running time of this task
+     * @return the running time of this task in seconds
      */
     public double execute(final Runnable task) {
         long start = System.nanoTime();
