@@ -10,6 +10,11 @@ import java.math.BigInteger;
 public final class Launcher {
 
     /**
+     * Nanoseconds in a second.
+     */
+    private static final double NANO = 1000000000.0;
+
+    /**
      * Hidden constructor.
      */
     private Launcher() {
@@ -27,7 +32,10 @@ public final class Launcher {
         BigInteger min = new BigInteger(args[0]);
         BigInteger max = new BigInteger(args[1]).add(min);
         Solver solver = new Simple(min, max);
+        long start = System.nanoTime();
         solver.run();
+        double time = (System.nanoTime() - start) / NANO;
+        System.out.println("Took " + time + " seconds.");
         System.out.println(solver);
     }
 }
