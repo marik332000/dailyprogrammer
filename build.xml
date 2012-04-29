@@ -2,8 +2,8 @@
 <project name="" default="jar" xmlns:ivy="antlib:org.apache.ivy.ant">
 
   <!-- Project-specific configuration -->
-  <property name="artifactId" value="dpNT"/>
-  <property name="description" value="r/dailyprogrammer #N (T)"/>
+  <property name="artifactId" value="dp44d"/>
+  <property name="description" value="r/dailyprogrammer #44 (difficult)"/>
   <property name="version" value="0.1"/>
   <property name="package.main" value="com.nullprogram.${artifactId}"/>
   <property name="main.class" value="${package.main}.Launcher"/>
@@ -57,10 +57,11 @@
   </target>
 
   <target name="run" depends="compile" description="Run the application.">
-    <java classname="${main.class}" classpath="${build.dir}/classes">
+    <java classname="${main.class}" classpath="${build.dir}/classes"
+          fork="true">
       <classpath refid="build.classpath"/>
-      <arg value="--name"/>
-      <arg value="Java"/>
+      <arg value="20922789888000"/>
+      <arg value="3628800"/>
     </java>
   </target>
 
