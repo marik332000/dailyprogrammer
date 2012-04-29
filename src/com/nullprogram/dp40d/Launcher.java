@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public final class Launcher {
 
-    private static final int DEFAULT_COUNT = 10000;
+    private static final int DEFAULT_COUNT = 1000000;
 
     @Parameter(names = { "--seed", "-s" },
                description = "Point generator seed.")
@@ -30,7 +30,7 @@ public final class Launcher {
 
     @Parameter(names = { "--algo" },
                description = "Solver algorithm to use (naive, planar).")
-    private String algo = "naive";
+    private String algo = "planar";
 
     @Parameter(names = { "--to-file" },
                description = "Save the points to a file.")
