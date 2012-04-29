@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.java.Log;
 import lombok.val;
+import static java.math.BigInteger.ONE;
 
 /**
  * Runs a Simple solver on each CPU core. In practice, even though
@@ -52,9 +53,8 @@ public class ParallelSimple implements Solver {
     @Override
     public final void run() {
         /* Figure out how much to split up the work. */
-        BigInteger range = max.subtract(min);
-        BigInteger nthreads = BigInteger.valueOf(NTHREADS);
-        BigInteger subrange = range.divide(nthreads).add(BigInteger.ONE);
+        val range = max.subtract(min);
+        val subrange = range.divide(BigInteger.valueOf(NTHREADS)).add(ONE);
         val exec = Executors.newFixedThreadPool(NTHREADS);
         val service = new ExecutorCompletionService<Solver>(exec);
 
