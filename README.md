@@ -11,4 +11,5 @@ I find interesting. Each solution is in its own branch.
 ## Won't Do (uninteresting)
 
  * Most easy and intermediate challenges
- * [#45 difficult](http://redd.it/sv6xs/)
+ * [#43 difficult](http://redd.it/sq3r7)
+ * [#45 difficult](http://redd.it/sv6xs)
