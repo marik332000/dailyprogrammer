@@ -18,7 +18,7 @@ public final class EditListConsole implements Runnable {
     /**
      * The EditList being worked on.
      */
-    private EditList list = new EditList();
+    private EditList<String> list = new EditList<String>();
 
     /**
      * The console to operate through.

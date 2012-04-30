@@ -11,38 +11,37 @@ import net.jcip.annotations.Immutable;
 /**
  * An immutable list of string that supports add, edit, delete, undo,
  * and redo by making new copies of this list.
+ *
+ * @param <V> the element type for this container
  */
 @Immutable
-public final class EditList {
-
-    /**
-     * The empty undo/redo stack.
-     */
-    private static final Deque<EditList> EMPTY = new ArrayDeque<EditList>();
+public final class EditList<V> {
 
     /**
      * The list of strings.
      */
     @NonNull
-    private final List<String> list;
+    private final List<V> list;
 
     /**
      * Stack of available undo operations.
      */
     @NonNull
-    private final Deque<EditList> undo;
+    private final Deque<EditList<V>> undo;
 
     /**
      * Stack of available redo operations.
      */
     @NonNull
-    private final Deque<EditList> redo;
+    private final Deque<EditList<V>> redo;
 
     /**
      * A new empty EditList.
      */
     public EditList() {
-        this(new ArrayList<String>(), EMPTY, EMPTY);
+        this(new ArrayList<V>(0),
+             new ArrayDeque<EditList<V>>(0),
+             new ArrayDeque<EditList<V>>(0));
     }
 
     /**
@@ -51,9 +50,9 @@ public final class EditList {
      * @param newundo  the undo stack
      * @param newredo  the undo stack
      */
-    private EditList(final List<String> newlist,
-                     final Deque<EditList> newundo,
-                     final Deque<EditList> newredo) {
+    private EditList(final List<V> newlist,
+                     final Deque<EditList<V>> newundo,
+                     final Deque<EditList<V>> newredo) {
         this.list = Collections.unmodifiableList(newlist);
         this.undo = newundo;
         this.redo = newredo;
@@ -63,7 +62,7 @@ public final class EditList {
      * Get the list of strings.
      * @return an immutable list
      */
-    public List<String> getList() {
+    public List<V> getList() {
         return Collections.unmodifiableList(list);
     }
 
@@ -72,12 +71,13 @@ public final class EditList {
      * @param item  the item to add
      * @return an EditList with the new item
      */
-    public EditList add(final String item) {
-        List<String> nextlist = new ArrayList<String>(list);
-        Deque<EditList> nextundo = new ArrayDeque<EditList>(undo);
+    public EditList<V> add(final V item) {
+        List<V> nextlist = new ArrayList<V>(list);
+        Deque<EditList<V>> nextundo = new ArrayDeque<EditList<V>>(undo);
         nextlist.add(item);
         nextundo.push(this);
-        return new EditList(nextlist, nextundo, EMPTY);
+        return new EditList<V>(nextlist, nextundo,
+                               new ArrayDeque<EditList<V>>(0));
     }
 
     /**
@@ -86,12 +86,13 @@ public final class EditList {
      * @param item   the new item
      * @return an EditList with the edit
      */
-    public EditList edit(final int index, final String item) {
-        List<String> nextlist = new ArrayList<String>(list);
-        Deque<EditList> nextundo = new ArrayDeque<EditList>(undo);
+    public EditList<V> edit(final int index, final V item) {
+        List<V> nextlist = new ArrayList<V>(list);
+        Deque<EditList<V>> nextundo = new ArrayDeque<EditList<V>>(undo);
         nextlist.set(index, item);
         nextundo.push(this);
-        return new EditList(nextlist, nextundo, EMPTY);
+        return new EditList<V>(nextlist, nextundo,
+                               new ArrayDeque<EditList<V>>(0));
     }
 
     /**
@@ -99,26 +100,28 @@ public final class EditList {
      * @param index  the index to delete
      * @return an EditList with the deletion
      */
-    public EditList delete(final int index) {
-        List<String> nextlist = new ArrayList<String>(list);
-        Deque<EditList> nextundo = new ArrayDeque<EditList>(undo);
+    public EditList<V> delete(final int index) {
+        List<V> nextlist = new ArrayList<V>(list);
+        Deque<EditList<V>> nextundo = new ArrayDeque<EditList<V>>(undo);
         nextlist.remove(index);
         nextundo.push(this);
-        return new EditList(nextlist, nextundo, EMPTY);
+        return new EditList<V>(nextlist, nextundo,
+                               new ArrayDeque<EditList<V>>(0));
     }
 
     /**
      * Revert the last change.
      * @return the previous list, but redo-able
      */
-    public EditList undo() {
+    public EditList<V> undo() {
         if (undo.isEmpty()) {
             throw new IllegalStateException("Nothing to undo.");
         } else {
-            EditList last = undo.peek();
-            Deque<EditList> nextredo = new ArrayDeque<EditList>(last.redo);
+            EditList<V> last = undo.peek();
+            Deque<EditList<V>> nextredo =
+                new ArrayDeque<EditList<V>>(last.redo);
             nextredo.push(this);
-            return new EditList(last.list, last.undo, nextredo);
+            return new EditList<V>(last.list, last.undo, nextredo);
         }
     }
 
@@ -126,7 +129,7 @@ public final class EditList {
      * Revert the last undo.
      * @return the restored list
      */
-    public EditList redo() {
+    public EditList<V> redo() {
         if (redo.isEmpty()) {
             throw new IllegalStateException("Nothing to redo.");
         } else {
