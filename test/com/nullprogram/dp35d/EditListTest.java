@@ -5,27 +5,27 @@ import org.junit.Test;
 
 public class EditListTest {
 
-    private EditList<String> list = new EditList<String>();
+    private ModifiableEditList<String> list = new ModifiableEditList<String>();
 
     @Test
     public void simpleTest() {
         String[] type = new String[0];
-        list = list.add("Foo");
-        list = list.add("Bar");
-        list = list.add("Baz");
-        list = list.edit(1, "RAB");
+        list.add("Foo");
+        list.add("Bar");
+        list.add("Baz");
+        list.edit(1, "RAB");
         assertArrayEquals(new String[] {"Foo", "RAB", "Baz"},
                           list.getList().toArray(type));
-        list = list.undo();
+        list.undo();
         assertArrayEquals(new String[] {"Foo", "Bar", "Baz"},
                           list.getList().toArray(type));
-        list = list.undo();
-        list = list.undo();
+        list.undo();
+        list.undo();
         assertArrayEquals(new String[] {"Foo"},
                           list.getList().toArray(type));
-        list = list.redo();
-        list = list.redo();
-        list = list.redo();
+        list.redo();
+        list.redo();
+        list.redo();
         assertArrayEquals(new String[] {"Foo", "RAB", "Baz"},
                           list.getList().toArray(type));
     }
