@@ -5,6 +5,7 @@ I find interesting. Each solution is in its own branch.
 
 ## Solved
 
+ * #35 difficult
  * #40 difficult
  * #42 difficult
  * #44 difficult
