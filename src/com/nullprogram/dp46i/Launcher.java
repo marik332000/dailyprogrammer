@@ -5,7 +5,7 @@ public class Launcher {
         int total = 1000000;
         int wins = 0;
         for (int i = 0; i < total; i++) {
-            Player player = new RepeatPlayer();
+            Player player = new RyaPlayer();
             Game game = new Game(player);
             if (game.play()) {
                 wins++;
