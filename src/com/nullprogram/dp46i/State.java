@@ -3,9 +3,16 @@ package com.nullprogram.dp46i;
 /**
  * Keeps track of a game's state.
  */
-public class State {
+public final class State {
 
+    /**
+     * The total number of slots.
+     */
     public static final int NSLOTS = 8;
+
+    /**
+     * The total number of values.
+     */
     public static final int NVALUES = 10;
 
     private int[] slots = new int[NSLOTS];
@@ -13,9 +20,11 @@ public class State {
 
     /**
      * Set the given slot position.
+     * @param index  the index to set
+     * @param value  the value to set
      * @return true if the game should continue
      */
-    public boolean set(int index, int value) {
+    public boolean set(final int index, final int value) {
         if (filled[index]) {
             throw new IllegalStateException("Slot already filled, " + index);
         } else {
@@ -31,7 +40,12 @@ public class State {
         return true;
     }
 
-    public int get(int index) {
+    /**
+     * Get the value for a slot.
+     * @param index  the index to read from
+     * @return the value in that slow
+     */
+    public int get(final int index) {
         return slots[index];
     }
 
@@ -40,7 +54,7 @@ public class State {
      * @param index  the index to check
      * @return true if already filled
      */
-    public boolean filled(int index) {
+    public boolean filled(final int index) {
         if (index < 0 || index >= NSLOTS) {
             return true;
         } else {

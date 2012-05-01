@@ -5,14 +5,14 @@ import java.util.Random;
 /**
  * Plays its turns completely at random. (0.02% win rate)
  */
-public class RandomPlayer implements Player {
+public final class RandomPlayer implements Player {
 
     private static final Random RNG = new Random();
 
     private final State state = new State();
 
     @Override
-    public int place(int n) {
+    public int place(final int n) {
         int index;
         do {
             index = RNG.nextInt(State.NVALUES);

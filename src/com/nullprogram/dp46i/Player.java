@@ -1,5 +1,8 @@
 package com.nullprogram.dp46i;
 
+/**
+ * A player of this game challenge.
+ */
 public interface Player {
     /**
      * Return the placement for the next digit.

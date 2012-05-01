@@ -3,7 +3,7 @@ package com.nullprogram.dp46i;
 /**
  * Tries to fill out the blanks from the middle. (0.45% win rate)
  */
-public class DividePlayer implements Player {
+public final class DividePlayer implements Player {
 
     private final State state = new State();
 

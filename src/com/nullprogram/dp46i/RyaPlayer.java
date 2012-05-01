@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Plays rya11111's strategy. (10.3% win rate)
  */
-public class RyaPlayer implements Player {
+public final class RyaPlayer implements Player {
 
     private final List<Integer> remaining = new LinkedList<Integer>();
 
@@ -20,7 +20,7 @@ public class RyaPlayer implements Player {
     }
 
     @Override
-    public int place(int n) {
+    public int place(final int n) {
         int rindex = (int) (remaining.size() * n * (1.0 / State.NVALUES));
         Integer index = remaining.get(rindex);
         remaining.remove(rindex);
