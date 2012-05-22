@@ -12,12 +12,14 @@ I find interesting. Each solution is in its own branch.
 
 ## To Solve
 
+ * [#34 difficult](http://redd.it/rmmrq)
  * [#51 difficult](http://redd.it/ti5jn)
  * [#53 difficult](http://redd.it/tpxqh)
 
 ## Won't Do (uninteresting)
 
  * Most easy and intermediate challenges
+ * [#33 difficult](http://redd.it/rl2g9)
  * [#36 difficult](http://redd.it/rujav)
  * [#37 difficult](http://redd.it/rzdjt)
  * [#38 difficult](http://redd.it/s2mxz)
