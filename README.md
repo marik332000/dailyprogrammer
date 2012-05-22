@@ -10,6 +10,11 @@ I find interesting. Each solution is in its own branch.
  * #42 difficult
  * #44 difficult
 
+## To Solve
+
+ * [#51 difficult](http://redd.it/ti5jn)
+ * [#53 difficult](http://redd.it/tpxqh)
+
 ## Won't Do (uninteresting)
 
  * Most easy and intermediate challenges
@@ -20,3 +25,11 @@ I find interesting. Each solution is in its own branch.
  * [#41 difficult](http://redd.it/shqs1)
  * [#43 difficult](http://redd.it/sq3r7)
  * [#45 difficult](http://redd.it/sv6xs)
+ * [#46 difficult](http://redd.it/szz72)
+ * [#47 difficult](http://redd.it/t33vo)
+ * [#48 difficult](http://redd.it/t78li)
+ * [#49 difficult](http://redd.it/tb2h7)
+ * [#50 difficult](http://redd.it/teu8p)
+ * [#52 difficult](http://redd.it/tmnfn)
+ * [#54 difficult](http://redd.it/tux8s)
+ * [#55 difficult](http://redd.it/txl9j)
