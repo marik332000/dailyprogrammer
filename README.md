@@ -5,10 +5,10 @@ I find interesting. Each solution is in its own branch.
 
 ## Solved
 
- * #35 difficult
- * #40 difficult
- * #42 difficult
- * #44 difficult
+ * [#35 difficult](http://redd.it/rr5rq)
+ * [#40 difficult](http://redd.it/schnp)
+ * [#42 difficult](http://redd.it/socdy)
+ * [#44 difficult](http://redd.it/srp5q)
 
 ## To Solve
 
